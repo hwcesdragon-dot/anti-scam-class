@@ -126,6 +126,17 @@
   .answer .src{margin-top:12px; font-size:13px; color:var(--ink-soft)}
   .answer .src a{color:var(--true); text-decoration:underline; text-underline-offset:2px}
 
+  .bank-hint{background:var(--mark-bg); border:1px solid var(--mark); border-radius:12px;
+    padding:14px 18px; margin-top:20px; font-size:15px}
+  .bank-hint b{color:var(--ink)}
+  .claim .task{margin:10px 0 0; font-size:14.5px; color:var(--ink-soft)}
+  .linkrow{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 2px}
+  .linkrow a{text-decoration:none; font-weight:700; font-size:14px; padding:9px 15px; border-radius:10px;
+    border:1px solid var(--true); color:#fff; background:var(--true); transition:transform .12s, opacity .12s}
+  .linkrow a.ghost{background:var(--panel); color:var(--true)}
+  .linkrow a:hover{transform:translateY(-1px); opacity:.92}
+  .src a.reportlink{color:var(--true); text-decoration:underline; text-underline-offset:2px}
+
   /* ---------- steps ---------- */
   .steps{counter-reset:step; display:grid; gap:14px; margin-top:24px}
   .step{
@@ -223,6 +234,7 @@
     <nav class="nav-links">
       <a href="#teacher">給老師</a>
       <a href="#lesson1">第一堂</a>
+      <a href="#bank">題庫</a>
       <a href="#lesson2">第二堂</a>
       <a href="#resource">查證資源</a>
       <a href="#worksheet">學習單下載</a>
@@ -375,6 +387,98 @@
         <li>「眼見不一定為憑」——AI 時代，連影片和聲音都能造假。</li>
         <li>「先查證，再相信；先查證，再轉傳。」不確定就先不要傳。</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICE BANK -->
+<section id="bank">
+  <div class="wrap">
+    <span class="sec-tag">課堂練習題庫</span>
+    <h2 class="sec">換你當查證偵探</h2>
+    <p class="sec-sub">下面都是真實流傳過的訊息與圖片。上課時先讓學生用「查證四步驟」自己查——搜尋關鍵字、比對查核網站、把可疑圖片用 Google 以圖反搜——查完再按「看解答」對答案。這些題目正好對應學習單一的第三大題。</p>
+
+    <div class="bank-hint">
+      <b>用法：</b>先按住不看答案，讓學生分組去查（可各組發不同題）。查完再點「看解答」揭曉，重點放在「你是怎麼查出來的」，而不只是對錯。
+    </div>
+
+    <div class="cards" style="margin-top:22px">
+
+      <div class="myth">
+        <div class="claim">
+          <div class="rumor-label">連鎖信・食物相剋</div>
+          <h4>「蝦子和維他命C一起吃，會在體內合成砒霜、會中毒！現在很多飲料都有維他命C，快轉傳給親友。」</h4>
+        </div>
+        <button class="reveal-btn" onclick="this.closest('.myth').classList.add('open')">先查證，再看解答</button>
+        <div class="answer">
+          <span class="verdict false">假 <span class="stamp">查核為假</span></span>
+          <p>假的。蝦裡的砷是毒性極低的「有機砷」，和砒霜（無機砷）不一樣，人吃了不會在體內變成砒霜。食藥署也算過，要達到中毒劑量，得吃下大約 50 公斤的蝦。看到「快轉傳給親友」這種催你散布、又拿健康嚇你的訊息，更要先停下來查證。</p>
+          <p class="src">查得到：<a class="reportlink" href="https://tfc-taiwan.org.tw/fact-check-reports/migration-4272/" target="_blank" rel="noopener">台灣事實查核中心</a>、MyGoPen、食藥署闢謠專區。</p>
+        </div>
+      </div>
+
+      <div class="myth">
+        <div class="claim">
+          <div class="rumor-label">連鎖信・收費恐嚇</div>
+          <h4>「LINE 公告：即日起傳早安問候圖要開始『雙向收費』，連按一個愛心也要收費，快貼到各群組通知大家！」</h4>
+        </div>
+        <button class="reveal-btn" onclick="this.closest('.myth').classList.add('open')">先查證，再看解答</button>
+        <div class="answer">
+          <span class="verdict false">假 <span class="stamp">查核為假</span></span>
+          <p>假的。這是流傳多年的改編謠言，LINE 官方也澄清過，一般聊天、群組裡傳訊息和圖片都不會向使用者收費。假冒官方＋用「收費」嚇你＋要你「貼到各群組」，是最典型的連鎖信套路，看到就該起疑。</p>
+          <p class="src">查得到：<a class="reportlink" href="https://www.mygopen.com/2021/07/line-charge.html" target="_blank" rel="noopener">MyGoPen 查核報告</a>。</p>
+        </div>
+      </div>
+
+      <div class="myth">
+        <div class="claim">
+          <div class="rumor-label">AI 內容農場・影片</div>
+          <h4>「台灣十大跌落神壇名店」「長輩天天吃的十種毒美食」——這類聳動的排行短影片。</h4>
+        </div>
+        <button class="reveal-btn" onclick="this.closest('.myth').classList.add('open')">先查證，再看解答</button>
+        <div class="answer">
+          <span class="verdict false">誤導 <span class="stamp">來源可疑</span></span>
+          <p>誤導。這類影片的旁白和文案其實是 AI 拼湊生成的，來源多半是 YouTube 內容農場，而且常把很久以前的舊聞包裝成「最近」發生。來源不明、只想衝點閱的影片，別急著相信或轉傳，回去查正規媒體有沒有一致的報導。</p>
+          <p class="src">查得到：MyGoPen。</p>
+        </div>
+      </div>
+
+      <div class="myth">
+        <div class="claim">
+          <div class="rumor-label">可疑圖片・以圖反搜</div>
+          <h4>每逢颱風、水災就有人瘋傳一張照片：「鯊魚都游到馬路上了，大家別靠近！」</h4>
+          <p class="task">課堂任務：先點開這張被瘋傳的照片，用 Google 以圖反搜或關鍵字搜尋，找出它最早出現在哪一年、原本是什麼照片。查完再按「看解答」。</p>
+          <div class="linkrow">
+            <a href="https://www.snopes.com/fact-check/shark-street-hurricane/" target="_blank" rel="noopener">看這張照片＋查核結果 →</a>
+            <a class="ghost" href="https://www.google.com/search?tbm=isch&q=hurricane+shark+flooded+street" target="_blank" rel="noopener">Google 以圖／關鍵字搜尋 →</a>
+          </div>
+        </div>
+        <button class="reveal-btn" onclick="this.closest('.myth').classList.add('open')">看解答</button>
+        <div class="answer">
+          <span class="verdict false">假 <span class="stamp">合成舊圖</span></span>
+          <p>假的，這是一張合成照。它從 2011 年就開始流傳，之後幾乎每次有大颱風、大水災就被重新拿出來貼一次。原圖其實是 2005 年一張大白鯊跟在獨木舟後面的照片，被人把鯊魚剪下來、貼到淹水街道的照片上；用以圖反搜就能找到最早的原圖。（生物學上也說不通——鯊魚在颱風來之前會游到更深、更安全的海域。）</p>
+          <p class="src">查得到：<a class="reportlink" href="https://www.snopes.com/fact-check/shark-street-hurricane/" target="_blank" rel="noopener">Snopes 查核報告</a>、CBS News、維基百科「Hurricane Shark」。教學重點：舊圖被反覆當成「最近的新聞」。</p>
+        </div>
+      </div>
+
+      <div class="myth">
+        <div class="claim">
+          <div class="rumor-label">可疑圖片・AI 生成</div>
+          <h4>「大地震後，一隻狗狗用身體保護瓦礫堆下的小寶寶，守護到獲救！好感人，快分享！」（附一張狗狗守護嬰兒的照片）</h4>
+          <p class="task">課堂任務：先點開這張被瘋傳的照片，用以圖反搜或查核網站查查看是真是假。查完再按「看解答」。</p>
+          <div class="linkrow">
+            <a href="https://tfc-taiwan.org.tw/fact-check-reports/venezuela-earthquake-ai-dog-image/" target="_blank" rel="noopener">看這張照片＋查核結果 →</a>
+            <a class="ghost" href="https://www.google.com/search?tbm=isch&q=忠犬+守護+嬰兒+地震+AI" target="_blank" rel="noopener">Google 以圖／關鍵字搜尋 →</a>
+          </div>
+        </div>
+        <button class="reveal-btn" onclick="this.closest('.myth').classList.add('open')">看解答</button>
+        <div class="answer">
+          <span class="verdict false">假 <span class="stamp">AI 生成</span></span>
+          <p>假的，這是 AI 生成的圖。委內瑞拉發生大地震後，網路瘋傳這張「忠犬守護小主人」的照片，很感人、很多人因此轉發；但用 AI 偵測工具一查，確認是 AI 生成的。其實「忠犬守護主人」是每次大災難後就會冒出來的老套路——2023 年土耳其大地震時也傳過類似照片，那張後來查出是 2018 年的圖庫舊照，跟地震根本無關。越是「太感人、太剛好」的災難奇蹟畫面，越要先查證。AI 假圖也常在細節露餡：手指數目怪怪的、文字變亂碼、背景扭曲、皮膚太光滑；放大看細節、再以圖反搜就能識破。</p>
+          <p class="src">查得到：<a class="reportlink" href="https://tfc-taiwan.org.tw/fact-check-reports/venezuela-earthquake-ai-dog-image/" target="_blank" rel="noopener">台灣事實查核中心查核報告</a>。教學重點：感人的畫面也可能是假的，而且同一種套路會一再出現。</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
