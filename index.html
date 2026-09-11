@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>網路識真 × 防詐教學專頁｜給小六生的兩堂課</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16232E;
+    --ink-soft:#3D4B55;
+    --paper:#E7EBE6;
+    --panel:#FFFFFF;
+    --line:#C9D1CA;
+    --line-soft:#E1E6E0;
+    --true:#1C7A54;
+    --true-bg:#E3F1EA;
+    --false:#B23125;
+    --false-bg:#F6E4E2;
+    --mark:#E0A32A;
+    --mark-bg:#FBEFD3;
+    --shadow:0 1px 0 rgba(22,35,46,.04), 0 10px 30px -18px rgba(22,35,46,.35);
+    --serif:"Noto Serif TC", "Songti TC", serif;
+    --sans:"Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-weight:400; line-height:1.75;
+    font-size:17px; -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:960px; margin:0 auto; padding:0 22px}
+
+  /* ---------- top nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50; background:rgba(231,235,230,.92);
+    backdrop-filter:saturate(1.2) blur(8px); border-bottom:1px solid var(--line);
+  }
+  .nav-inner{max-width:960px; margin:0 auto; padding:11px 22px; display:flex; align-items:center; gap:16px}
+  .brand{font-family:var(--serif); font-weight:900; font-size:19px; letter-spacing:.5px; white-space:nowrap}
+  .brand b{color:var(--true)}
+  .brand i{font-style:normal; color:var(--false)}
+  .nav-links{margin-left:auto; display:flex; gap:6px; flex-wrap:wrap}
+  .nav-links a{
+    text-decoration:none; font-size:14px; font-weight:500; color:var(--ink-soft);
+    padding:6px 11px; border-radius:999px; transition:background .15s,color .15s;
+  }
+  .nav-links a:hover{background:var(--panel); color:var(--ink)}
+  .nav-toggle{display:none}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 46px}
+  .hero .kicker{font-weight:700; letter-spacing:2px; color:var(--ink-soft); font-size:13px}
+  .hero h1{
+    font-family:var(--serif); font-weight:900; line-height:1.12;
+    font-size:clamp(34px,6vw,58px); margin:14px 0 0;
+  }
+  .hero p.lead{font-size:clamp(17px,2.4vw,20px); color:var(--ink-soft); max-width:44ch; margin:20px 0 0}
+  .seals{display:flex; gap:22px; margin:38px 0 0; flex-wrap:wrap}
+  .seal{
+    width:132px; height:132px; border-radius:50%; display:grid; place-items:center;
+    font-family:var(--serif); font-weight:900; font-size:60px; position:relative;
+    transform:rotate(-8deg);
+  }
+  .seal.t{border:5px double var(--true); color:var(--true); background:var(--true-bg)}
+  .seal.f{border:5px double var(--false); color:var(--false); background:var(--false-bg); transform:rotate(7deg)}
+  .seal small{position:absolute; bottom:14px; font-family:var(--sans); font-size:12px; font-weight:700; letter-spacing:2px}
+  .hero .askline{margin-top:26px; font-family:var(--serif); font-weight:700; font-size:clamp(20px,3.4vw,28px)}
+  .hero .askline .amp{color:var(--mark)}
+
+  /* ---------- section frame ---------- */
+  section{padding:52px 0; border-top:1px solid var(--line)}
+  .sec-tag{
+    display:inline-block; font-weight:700; font-size:13px; letter-spacing:1.5px;
+    color:var(--ink-soft); border:1px solid var(--line); border-radius:999px; padding:4px 13px; background:var(--panel);
+  }
+  h2.sec{font-family:var(--serif); font-weight:900; font-size:clamp(26px,4.4vw,38px); margin:16px 0 8px; line-height:1.2}
+  .sec-sub{color:var(--ink-soft); max-width:60ch; margin:0 0 8px}
+
+  /* ---------- lesson header band ---------- */
+  .lesson-band{
+    display:flex; gap:18px; align-items:flex-start; background:var(--panel);
+    border:1px solid var(--line); border-radius:16px; padding:22px 24px; box-shadow:var(--shadow); margin-top:22px;
+  }
+  .lesson-no{
+    flex:0 0 auto; width:62px; height:62px; border-radius:14px; background:var(--ink); color:#fff;
+    display:grid; place-items:center; font-family:var(--serif); font-weight:900; font-size:30px;
+  }
+  .lesson-band h3{margin:0 0 4px; font-size:22px; font-family:var(--serif); font-weight:900}
+  .lesson-meta{font-size:14px; color:var(--ink-soft); font-weight:500}
+  .goal-list{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:7px}
+  .goal-list li{position:relative; padding-left:26px; font-size:15.5px}
+  .goal-list li::before{content:"✔"; position:absolute; left:0; color:var(--true); font-weight:700}
+
+  /* ---------- myth cards ---------- */
+  .cards{display:grid; gap:16px; margin-top:26px}
+  @media(min-width:720px){ .cards.two{grid-template-columns:1fr 1fr} }
+  .myth{
+    background:var(--panel); border:1px solid var(--line); border-radius:16px; overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .myth .claim{padding:20px 22px 16px}
+  .myth .claim .rumor-label{font-size:12px; font-weight:700; letter-spacing:1px; color:var(--false)}
+  .myth .claim h4{margin:6px 0 0; font-size:19px; font-family:var(--serif); font-weight:700; line-height:1.4}
+  .reveal-btn{
+    margin:14px 22px 20px; appearance:none; cursor:pointer; font-family:var(--sans);
+    font-weight:700; font-size:15px; color:var(--ink); background:var(--mark-bg);
+    border:1px solid var(--mark); border-radius:999px; padding:9px 18px; transition:background .15s;
+  }
+  .reveal-btn:hover{background:var(--mark); color:#fff}
+  .answer{display:none; border-top:1px dashed var(--line); padding:18px 22px 22px; background:linear-gradient(0deg,rgba(28,122,84,.03),transparent)}
+  .myth.open .answer{display:block}
+  .myth.open .reveal-btn{display:none}
+  .verdict{display:inline-flex; align-items:center; gap:8px; font-family:var(--serif); font-weight:900; font-size:20px}
+  .verdict.false{color:var(--false)}
+  .verdict.true{color:var(--true)}
+  .verdict .stamp{
+    font-size:13px; font-family:var(--sans); font-weight:700; border:2px solid currentColor;
+    border-radius:6px; padding:2px 8px; transform:rotate(-6deg); letter-spacing:1px;
+  }
+  .answer p{margin:12px 0 0; font-size:15.5px}
+  .answer .src{margin-top:12px; font-size:13px; color:var(--ink-soft)}
+  .answer .src a{color:var(--true); text-decoration:underline; text-underline-offset:2px}
+
+  /* ---------- steps ---------- */
+  .steps{counter-reset:step; display:grid; gap:14px; margin-top:24px}
+  .step{
+    display:flex; gap:16px; background:var(--panel); border:1px solid var(--line);
+    border-radius:14px; padding:18px 20px; box-shadow:var(--shadow);
+  }
+  .step::before{
+    counter-increment:step; content:counter(step); flex:0 0 auto;
+    width:40px; height:40px; border-radius:10px; background:var(--mark-bg); color:var(--mark);
+    border:1px solid var(--mark); display:grid; place-items:center; font-family:var(--serif); font-weight:900; font-size:20px;
+  }
+  .step h4{margin:2px 0 4px; font-size:17px}
+  .step p{margin:0; font-size:15px; color:var(--ink-soft)}
+
+  /* ---------- stat strip ---------- */
+  .stats{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:24px}
+  @media(min-width:640px){ .stats{grid-template-columns:repeat(4,1fr)} }
+  .stat{background:var(--ink); color:#fff; border-radius:14px; padding:18px 16px}
+  .stat b{display:block; font-family:var(--serif); font-weight:900; font-size:30px; line-height:1.1}
+  .stat span{font-size:13px; color:#C6D2CB}
+
+  /* ---------- scam list ---------- */
+  .scam{
+    background:var(--panel); border:1px solid var(--line); border-left:5px solid var(--false);
+    border-radius:12px; padding:16px 20px; margin-top:14px; box-shadow:var(--shadow);
+  }
+  .scam h4{margin:0 0 6px; font-size:18px; font-family:var(--serif); font-weight:700}
+  .scam .who{font-size:12px; font-weight:700; color:var(--false); letter-spacing:.5px}
+  .scam p{margin:6px 0 0; font-size:15px}
+  .scam .flag{margin-top:10px; font-size:14px; background:var(--false-bg); border-radius:8px; padding:8px 12px}
+  .scam .flag b{color:var(--false)}
+
+  /* ---------- golden lines ---------- */
+  .golden{display:grid; gap:10px; margin-top:22px}
+  .gl{display:flex; gap:12px; align-items:flex-start; background:var(--true-bg); border:1px solid #BFE0CE; border-radius:12px; padding:14px 18px}
+  .gl .key{flex:0 0 auto; font-family:var(--serif); font-weight:900; color:var(--true); font-size:15px; width:96px}
+  .gl .val{font-size:15.5px}
+  .gl .val b{color:var(--true)}
+
+  /* ---------- psychology chips ---------- */
+  .psy{display:grid; gap:12px; margin-top:20px}
+  @media(min-width:640px){ .psy{grid-template-columns:1fr 1fr} }
+  .chip{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px 18px; box-shadow:var(--shadow)}
+  .chip b{font-family:var(--serif); font-size:16px}
+  .chip p{margin:4px 0 0; font-size:14.5px; color:var(--ink-soft)}
+
+  /* ---------- resource table ---------- */
+  .res{margin-top:22px; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--panel); box-shadow:var(--shadow)}
+  .res-row{display:grid; grid-template-columns:150px 1fr; border-top:1px solid var(--line-soft)}
+  .res-row:first-child{border-top:0}
+  .res-row .name{padding:14px 18px; font-weight:700; background:#F4F6F3; border-right:1px solid var(--line-soft)}
+  .res-row .desc{padding:14px 18px; font-size:15px}
+  .res-row .desc a{color:var(--true); text-decoration:underline; text-underline-offset:2px; word-break:break-all}
+  @media(max-width:560px){
+    .res-row{grid-template-columns:1fr}
+    .res-row .name{border-right:0; border-bottom:1px solid var(--line-soft)}
+  }
+  .hot{display:inline-block; font-family:var(--serif); font-weight:900; color:var(--false); font-size:15px}
+
+  /* ---------- downloads ---------- */
+  .dl{display:grid; gap:16px; margin-top:24px}
+  @media(min-width:680px){ .dl{grid-template-columns:1fr 1fr} }
+  .dlcard{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:22px 24px; box-shadow:var(--shadow)}
+  .dlcard h4{margin:0 0 4px; font-family:var(--serif); font-weight:900; font-size:20px}
+  .dlcard p{margin:0 0 16px; font-size:14.5px; color:var(--ink-soft)}
+  .dl-btns{display:flex; gap:10px; flex-wrap:wrap}
+  .dl-btns a{
+    text-decoration:none; font-weight:700; font-size:14.5px; padding:10px 16px; border-radius:10px;
+    border:1px solid var(--ink); color:var(--ink); background:var(--panel); transition:all .15s;
+  }
+  .dl-btns a.primary{background:var(--ink); color:#fff}
+  .dl-btns a:hover{transform:translateY(-1px)}
+  .dl-note{margin-top:16px; font-size:13.5px; color:var(--ink-soft); background:var(--mark-bg); border:1px solid var(--mark); border-radius:10px; padding:12px 16px}
+
+  /* ---------- callout ---------- */
+  .callout{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px 24px; margin-top:20px; box-shadow:var(--shadow)}
+  .callout h4{margin:0 0 8px; font-family:var(--serif); font-weight:700; font-size:18px}
+  .callout ul{margin:8px 0 0; padding-left:20px}
+  .callout li{margin:6px 0; font-size:15.5px}
+
+  /* ---------- sources / footer ---------- */
+  .sources{font-size:13.5px; color:var(--ink-soft); line-height:1.9}
+  .sources a{color:var(--true); word-break:break-all}
+  footer{padding:40px 0 60px; border-top:1px solid var(--line); color:var(--ink-soft); font-size:13.5px}
+  footer .credit{font-family:var(--serif); font-weight:900; font-size:18px; color:var(--ink); margin-bottom:10px}
+
+  ::selection{background:var(--mark); color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <span class="brand">網路<b>識真</b>　×　<i>防詐</i></span>
+    <nav class="nav-links">
+      <a href="#teacher">給老師</a>
+      <a href="#lesson1">第一堂</a>
+      <a href="#lesson2">第二堂</a>
+      <a href="#resource">查證資源</a>
+      <a href="#worksheet">學習單下載</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" style="border-top:0">
+  <div class="wrap">
+    <div class="kicker">網路素養與防詐教育．適用對象：國小六年級</div>
+    <h1>看到的，<br>不一定是真的。</h1>
+    <p class="lead">網路上真假難分，被詐騙而家庭破碎的人越來越多。這兩堂課要幫學生練出一雙「查證的眼睛」，也把這份能力帶回家，保護爸媽和阿公阿嬤。</p>
+    <div class="seals">
+      <div class="seal t">真<small>VERIFIED</small></div>
+      <div class="seal f">假<small>FAKE</small></div>
+    </div>
+    <div class="askline">兩堂課 <span class="amp">×</span> 40 分鐘：先學會<u>辨真假</u>，再學會<u>防詐騙</u>。</div>
+  </div>
+</section>
+
+<!-- TEACHER GUIDE -->
+<section id="teacher">
+  <div class="wrap">
+    <span class="sec-tag">給老師的使用說明</span>
+    <h2 class="sec">怎麼用這個網頁上課</h2>
+    <p class="sec-sub">本頁把兩堂課的案例、方法、資源與學習單整理在一起，方便投影授課，課後也可讓學生或其他老師回來查詢。案例卡片點一下就能翻出答案，適合現場帶著全班「先猜、再驗證」。</p>
+
+    <div class="callout">
+      <h4>建議流程（每堂 40 分鐘）</h4>
+      <ul>
+        <li><b>導入（5 分鐘）</b>：投影「真／假印章」，丟一則貼近學生生活的訊息，全班先舉手投票真或假。</li>
+        <li><b>案例拆解（20 分鐘）</b>：帶 2～3 張案例卡，讓學生先猜，再點開答案與查證說明。重點放在「為什麼會被誤導」。</li>
+        <li><b>方法演練（10 分鐘）</b>：用「查證四步驟」或「防詐紅旗」實際操作一次。</li>
+        <li><b>學習單與收束（5 分鐘）</b>：發下對應學習單，說明回家任務（查證作業／守護家人任務）。</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <h4>準備物品</h4>
+      <ul>
+        <li>可上網的投影設備（用來現場示範查證）。</li>
+        <li>列印本頁下方的兩份學習單（Word 可先依班級調整，或直接印 PDF）。</li>
+        <li>若學生有平板／手機，可分組實作「以圖反搜」與查核網站查詢。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 1 -->
+<section id="lesson1">
+  <div class="wrap">
+    <span class="sec-tag">第一堂課</span>
+    <h2 class="sec">網路辨真假：眼見不一定為憑</h2>
+
+    <div class="lesson-band">
+      <div class="lesson-no">1</div>
+      <div>
+        <h3>學會不被「廣為流傳」騙倒</h3>
+        <div class="lesson-meta">40 分鐘｜關鍵字：查證、以圖反搜、AI 深偽、不要急著轉傳</div>
+        <ul class="goal-list">
+          <li>知道「很多人都在傳」不等於「這是真的」。</li>
+          <li>學會用「查證四步驟」判斷一則訊息、一張圖、一段影片。</li>
+          <li>認識 AI 深偽（Deepfake）影片，知道它能把名人的臉和聲音都造假。</li>
+          <li>養成習慣：先查證，再決定要不要相信、要不要轉傳。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif); font-weight:900; font-size:22px; margin:38px 0 4px">案例卡：大家都信，但其實是假的</h3>
+    <p class="sec-sub">下面每張卡片都是流傳很廣的說法。先讓學生猜猜看，再點開查核結果。</p>
+
+    <div class="cards two">
+
+      <div class="myth">
+        <div class="claim">
+          <div class="rumor-label">流傳說法</div>
+          <h4>「人類只用了大腦的 10%，開發剩下的就能變天才。」</h4>
+        </div>
+        <button class="reveal-btn" onclick="this.closest('.myth').classList.add('open')">這是真的還是假的？點開查核</button>
+        <div class="answer">
+          <span class="verdict false">假 <span class="stamp">查核為假</span></span>
+          <p>這是流傳超過百年的都市傳說，還常被冒名說是愛因斯坦講的。實際上，大腦幾乎每個區域都在運作，就算休息時也一樣。腦部掃描顯示各區都會活躍；而且就算只損傷一小塊腦，也可能造成嚴重後果——如果 90% 真的沒在用，這些損傷就不該有影響了。</p>
+          <p class="src">查證來源：台大 CASE 報科學、PanSci 泛科學、維基百科「大腦的百分之十神話」。</p>
+        </div>
+      </div>
+
+      <div class="myth">
+        <div class="claim">
+          <div class="rumor-label">流傳說法</div>
+          <h4>「金魚的記憶只有 7 秒，轉個身就忘光了。」</h4>
+        </div>
+        <button class="reveal-btn" onclick="this.closest('.myth').classList.add('open')">這是真的還是假的？點開查核</button>
+        <div class="answer">
+          <span class="verdict false">假 <span class="stamp">查核為假</span></span>
+          <p>金魚其實記性不差。早在 1965 年就有研究讓金魚記住「亮光＝要躲開」長達一個多月；牛津大學的實驗還發現金魚能記住游多遠再折返。多數研究顯示魚類記憶可維持數週到數個月，有些甚至好幾年。「金魚腦」是被冤枉的。</p>
+          <p class="src">查證來源：牛津大學研究報導、PanSci 泛科學、The News Lens 關鍵評論網。</p>
+        </div>
+      </div>
+
+      <div class="myth">
+        <div class="claim">
+          <div class="rumor-label">流傳影片</div>
+          <h4>「這段影片是中國某地暴動升級的現場！大家快傳！」</h4>
+        </div>
+        <button class="reveal-btn" onclick="this.closest('.myth').classList.add('open')">這是真的還是假的？點開查核</button>
+        <div class="answer">
+          <span class="verdict false">假 <span class="stamp">移花接木</span></span>
+          <p>2025 年就有謠言把好幾段影片拼在一起，宣稱是中國多地事件升級。查核記者用 Google 地圖、不斷更換關鍵字比對，最後查出其中壯觀的人潮畫面，其實是<b>香港放煙火時的交通管制</b>，跟謠言講的事件完全無關。這就是典型的「移花接木／張冠李戴」——影片是真的，但被配上假的說明。</p>
+          <p class="src">查證來源：台灣事實查核中心。教學重點：影片為真 ≠ 說明為真。</p>
+        </div>
+      </div>
+
+      <div class="myth">
+        <div class="claim">
+          <div class="rumor-label">流傳影片廣告</div>
+          <h4>「黃仁勳、張忠謀親自在影片裡推薦這個穩賺投資！」</h4>
+        </div>
+        <button class="reveal-btn" onclick="this.closest('.myth').classList.add('open')">這是真的還是假的？點開查核</button>
+        <div class="answer">
+          <span class="verdict false">假 <span class="stamp">AI 深偽</span></span>
+          <p>詐騙集團用 AI「深偽（Deepfake）」技術，把名人公開影片的嘴型換掉、聲音合成，做出他們「從沒說過的話」。台灣已出現冒用黃仁勳、張忠謀、蔡英文的假投資影片；被冒用機率最高的名人之一是作家吳淡如。仔細看常會發現<b>嘴型和聲音對不上</b>。真正的投資一定透過金管會核准的正式管道，名人不會在社群廣告叫你加 LINE 群組。</p>
+          <p class="src">查證來源：中央社、刑事警察局 165、MyGoPen。辨識線索：嘴型不同步、畫面模糊、要你「加群組、點連結、馬上入金」。</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 style="font-family:var(--serif); font-weight:900; font-size:22px; margin:44px 0 4px">查證四步驟（帶著學生做一次）</h3>
+    <div class="steps">
+      <div class="step">
+        <div><h4>停一下，別急著轉傳</h4><p>越是「快傳！」「別讓孩子看不到！」這種催你分享的訊息，越要先停下來。轉傳前先問自己：這是真的嗎？</p></div>
+      </div>
+      <div class="step">
+        <div><h4>找來源：誰說的？</h4><p>看訊息有沒有具名的作者、正式媒體或政府單位。只有「聽說」「朋友的朋友」「某醫生說」而查無此人，就要打問號。</p></div>
+      </div>
+      <div class="step">
+        <div><h4>交叉比對：別人也這樣報嗎？</h4><p>用關鍵字上網搜尋，看看正規媒體、官方網站有沒有一致的報導。只有一個來源、其他都查不到，很可疑。</p></div>
+      </div>
+      <div class="step">
+        <div><h4>查圖查影片：以圖反搜＋問查核網站</h4><p>把可疑圖片存下來，用 Google 圖片「以圖搜尋」看它原本出現在哪裡、是哪一年的。文字訊息可貼給 Cofacts、MyGoPen 查詢。</p></div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:26px">
+      <h4>一句話帶回家</h4>
+      <ul>
+        <li>「眼見不一定為憑」——AI 時代，連影片和聲音都能造假。</li>
+        <li>「先查證，再相信；先查證，再轉傳。」不確定就先不要傳。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 2 -->
+<section id="lesson2">
+  <div class="wrap">
+    <span class="sec-tag">第二堂課</span>
+    <h2 class="sec">識詐防騙：天下沒有白吃的午餐</h2>
+
+    <div class="lesson-band">
+      <div class="lesson-no">2</div>
+      <div>
+        <h3>看穿詐騙的套路與心理陷阱</h3>
+        <div class="lesson-meta">40 分鐘｜關鍵字：遊戲點數、免費虛寶、假投資、165、守護家人</div>
+        <ul class="goal-list">
+          <li>認識和自己生活最相關的詐騙（遊戲、社群、假抽獎）。</li>
+          <li>知道詐騙集團利用哪些心理：貪心、害怕、急迫、信任。</li>
+          <li>記住 165 反詐騙專線，遇到可疑訊息知道怎麼查證、找誰求助。</li>
+          <li>學會把防詐知識教給家人，一起守住荷包。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif); font-weight:900; font-size:22px; margin:38px 0 6px">先看數字：詐騙有多嚴重</h3>
+    <div class="stats">
+      <div class="stat"><b>約 893 億</b><span>2025 全年全台詐騙財損（元）</span></div>
+      <div class="stat"><b>16.2 萬</b><span>2025 全年受理詐騙案件數</span></div>
+      <div class="stat"><b>逾 9 成</b><span>民眾認為詐團經常在製造假訊息</span></div>
+      <div class="stat"><b>第 1 名</b><span>詐騙已成假訊息最大來源</span></div>
+    </div>
+    <p class="sec-sub" style="margin-top:12px">資料來源：內政部警政署「165 打詐儀表板」、2025 假訊息大調查。詐騙已經不只是「別人的事」——它天天透過手機、社群找上每一個人。</p>
+
+    <h3 style="font-family:var(--serif); font-weight:900; font-size:22px; margin:40px 0 6px">和學生最有關的詐騙（要重點講）</h3>
+
+    <div class="scam">
+      <div class="who">最容易騙到小學生</div>
+      <h4>免費送遊戲帳號／虛寶，然後叫你「回傳認證碼」</h4>
+      <p>詐騙集團在 TikTok、IG、遊戲聊天室貼「免費送高級帳號」「免費抽造型、皮膚」，看準小朋友想變強、想要造型的心理。接著要你提供手機號碼、把簡訊收到的「認證碼」回傳——其實那是拿你的門號去做「電信小額付費」，錢就默默加進電話帳單，家長下個月才發現。熱門的 Roblox、原神、蛋仔派對都被當成入口。</p>
+      <div class="flag"><b>紅旗：</b>陌生人說要免費送你貴重的東西、要你回傳簡訊驗證碼、叫你「先別跟爸媽說」。</div>
+    </div>
+
+    <div class="scam">
+      <div class="who">遊戲玩家小心</div>
+      <h4>叫你去超商買「遊戲點數」，把序號拍給他</h4>
+      <p>不管對方說是客服、是網友、還是「幫你解除設定」「幫你驗證身分」，只要結局是「去買遊戲點數、把序號密碼給我」，<b>一定是詐騙</b>。遊戲點數的序號就等於現金，沒有任何「驗證身分」的功能，交出去就被拿去換錢洗掉了。有的騙徒還會說「序號你可以遮住喔，只是確認一下」——一樣是騙。</p>
+      <div class="flag"><b>紅旗：</b>「遊戲點數序號」被拿來當作驗證、解除分期、證明身分的理由——全都是假的。</div>
+    </div>
+
+    <div class="scam">
+      <div class="who">升級版：連假警察都出動</div>
+      <h4>先假裝好心送你，再換一個人假扮警察嚇你</h4>
+      <p>近期手法：先有人假裝親切「免費送你遊戲帳號」，等你有疑問，另一個人就換上「假警察」身分，說你涉及刑案、快被逮捕，製造恐慌，逼你交出驗證碼、個資，甚至把 SIM 卡寄出去，害你變成詐騙集團的「人頭門號」。它可怕的地方，是利用小朋友「怕被處罰、不敢讓爸媽知道」的心理。</p>
+      <div class="flag"><b>紅旗：</b>真正的警察不會用 LINE 辦案、不會要你保密、不會叫你寄 SIM 卡或報驗證碼。害怕時「一定要告訴爸媽或老師」。</div>
+    </div>
+
+    <h3 style="font-family:var(--serif); font-weight:900; font-size:22px; margin:40px 0 6px">要提醒家人的詐騙（回家任務）</h3>
+
+    <div class="scam">
+      <div class="who">財損金額最高</div>
+      <h4>假投資：保證獲利、穩賺不賠</h4>
+      <p>假冒理財老師、名人或投資平台，在 LINE、FB 拉你進「飆股群組」，一開始讓你小賺嚐甜頭，等你投入大錢就再也領不出來。這是這幾年財損最高的詐騙。</p>
+      <div class="flag"><b>紅旗：</b>只要出現「保證獲利、穩賺不賠、低風險高報酬」——一定是詐騙。</div>
+    </div>
+
+    <div class="scam">
+      <div class="who">感情陷阱</div>
+      <h4>假交友（殺豬盤）</h4>
+      <p>網路上噓寒問暖、談感情建立信任，再以「一起投資」「我幫你賺」為名騙錢，很多人因此積蓄全失、家庭破碎。</p>
+      <div class="flag"><b>紅旗：</b>只在網路上認識、沒見過面，卻談到錢、談到投資——高度警戒。</div>
+    </div>
+
+    <div class="scam">
+      <div class="who">常見話術</div>
+      <h4>假客服、假中獎、假買家</h4>
+      <p>「你的訂單重複扣款要退費」「恭喜中獎，先付手續費」「我是買家，操作 ATM 就能收款」——都是要你去 ATM 或網銀「操作」。記住：ATM 只會匯出錢，不會退錢；官方退款不需要你操作 ATM。</p>
+      <div class="flag"><b>紅旗：</b>任何人叫你去 ATM／網銀「操作解除設定、退款、驗證」——一定是詐騙。</div>
+    </div>
+
+    <h3 style="font-family:var(--serif); font-weight:900; font-size:22px; margin:44px 0 6px">為什麼會上當？詐騙的心理陷阱</h3>
+    <p class="sec-sub">越覺得「我才不會被騙」的人，反而越容易中招。詐騙不是因為笨，而是被打中了情緒。</p>
+    <div class="psy">
+      <div class="chip"><b>貪：太好康</b><p>免費、超低價、穩賺——利用貪小便宜的心理。天下沒有白吃的午餐。</p></div>
+      <div class="chip"><b>怕：嚇你</b><p>假警察、帳戶異常、涉及刑案——製造恐慌，讓你來不及思考就照做。</p></div>
+      <div class="chip"><b>急：限時</b><p>「名額只剩最後一個」「10 分鐘內處理」——用急迫感逼你不查證就行動。</p></div>
+      <div class="chip"><b>信：裝熟裝權威</b><p>假冒親友、名人、官方，或先跟你搏感情。你越信任，就越不設防。</p></div>
+    </div>
+
+    <h3 style="font-family:var(--serif); font-weight:900; font-size:22px; margin:44px 0 6px">165 的防詐金句（背起來）</h3>
+    <div class="golden">
+      <div class="gl"><div class="key">網路購物</div><div class="val">要你<b>跳過平台、私下交易</b>——一定是詐騙。官方平台才有保障。</div></div>
+      <div class="gl"><div class="key">假投資</div><div class="val"><b>保證獲利、穩賺不賠</b>——一定是詐騙。</div></div>
+      <div class="gl"><div class="key">遊戲點數</div><div class="val">序號<b>不能驗證身分</b>。任何要你買點數、報序號的——一定是詐騙。</div></div>
+      <div class="gl"><div class="key">假中獎</div><div class="val">中獎要你<b>先付手續費</b>——一定是詐騙。</div></div>
+      <div class="gl"><div class="key">ATM／網銀</div><div class="val">要你去<b>操作 ATM 解除設定或退款</b>——一定是詐騙。</div></div>
+    </div>
+
+    <div class="callout" style="margin-top:28px">
+      <h4>遇到可疑訊息，三步驟</h4>
+      <ul>
+        <li><b>停：</b>不點連結、不加群組、不給個資、不轉帳。</li>
+        <li><b>查：</b>撥打 <span class="hot">165</span> 反詐騙專線查證，或問信任的大人。可疑訊息也可貼給 Cofacts、MyGoPen 查詢。</li>
+        <li><b>報：</b>已經受騙或差點受騙，打 <span class="hot">165</span> 或 <span class="hot">110</span>，並保留對話截圖。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resource">
+  <div class="wrap">
+    <span class="sec-tag">查證與反詐資源</span>
+    <h2 class="sec">可以查真假、可以求助的地方</h2>
+    <p class="sec-sub">帶學生現場示範一次最有效。手機可加 LINE 官方帳號，收到可疑訊息直接貼過去就能查。</p>
+
+    <div class="res">
+      <div class="res-row"><div class="name"><span class="hot">165</span> 反詐騙專線</div><div class="desc">內政部警政署。懷疑被騙、想查證，直接打電話，24 小時。緊急報案打 110。</div></div>
+      <div class="res-row"><div class="name">165 打詐儀表板</div><div class="desc">官方詐騙統計與最新手法。<a href="https://165.npa.gov.tw/" target="_blank" rel="noopener">165.npa.gov.tw</a></div></div>
+      <div class="res-row"><div class="name">台灣事實查核中心</div><div class="desc">獨立事實查核組織，破解假新聞、假影片。<a href="https://tfc-taiwan.org.tw/" target="_blank" rel="noopener">tfc-taiwan.org.tw</a></div></div>
+      <div class="res-row"><div class="name">MyGoPen 麥擱騙</div><div class="desc">查謠言與詐騙訊息，可用 LINE 查詢（＠mygopen）。<a href="https://www.mygopen.com/" target="_blank" rel="noopener">mygopen.com</a></div></div>
+      <div class="res-row"><div class="name">Cofacts 真的假的</div><div class="desc">公民協作的查證聊天機器人。加 LINE ＠cofacts，把訊息貼過去就能查。<a href="https://cofacts.tw/" target="_blank" rel="noopener">cofacts.tw</a></div></div>
+      <div class="res-row"><div class="name">趨勢科技防詐達人</div><div class="desc">LINE 機器人，可查訊息、網址、LINE 帳號是否為詐騙。</div></div>
+      <div class="res-row"><div class="name">Google 以圖反搜</div><div class="desc">把可疑圖片存下來，用 Google 圖片搜尋，看它原本出處與年代，抓出「移花接木」。</div></div>
+    </div>
+
+    <div class="dl-note" style="margin-top:20px">
+      提醒：查核網站是「幫你判斷的工具」，不是唯一答案。查不到結果時，回到「查證四步驟」自己交叉比對，並詢問信任的大人。
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHEETS -->
+<section id="worksheet">
+  <div class="wrap">
+    <span class="sec-tag">學習單下載</span>
+    <h2 class="sec">動手查、親筆寫，把能力變成自己的</h2>
+    <p class="sec-sub">每堂課各一份學習單。Word 檔可依班級需要編輯調整；PDF 檔可直接列印。學習單要學生實際查證、親筆書寫與反思，把課堂內容內化。</p>
+
+    <div class="dl">
+      <div class="dlcard">
+        <h4>學習單一：網路辨真假</h4>
+        <p>訊息真假判斷、迷思查證實作、AI 深偽觀察、以及「我以後會怎麼做」的反思。</p>
+        <div class="dl-btns">
+          <a class="primary" href="學習單1_網路辨真假.docx" data-dl="ws1-word">下載 Word（可編輯）</a>
+          <a href="學習單1_網路辨真假.pdf" target="_blank" rel="noopener" data-dl="ws1-pdf">下載 PDF（可列印）</a>
+        </div>
+      </div>
+      <div class="dlcard">
+        <h4>學習單二：識詐防騙</h4>
+        <p>詐騙情境判斷、防詐金句、心理陷阱配對，以及訪問家人的「守護家人任務」與防詐承諾。</p>
+        <div class="dl-btns">
+          <a class="primary" href="學習單2_識詐防騙.docx" data-dl="ws2-word">下載 Word（可編輯）</a>
+          <a href="學習單2_識詐防騙.pdf" target="_blank" rel="noopener" data-dl="ws2-pdf">下載 PDF（可列印）</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dl-note">
+      使用提醒：請把兩份 Word／PDF 檔案，和本網頁（index.html）放在<b>同一個資料夾</b>，上面的下載連結才能正常開啟。
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section>
+  <div class="wrap">
+    <span class="sec-tag">資料來源</span>
+    <h2 class="sec">本頁內容的查證出處</h2>
+    <p class="sources">
+      詐騙統計與手法：內政部警政署刑事警察局「165 打詐儀表板」、165 全民防騙；2025 年詐騙財損與案件數（台視新聞網、聯合新聞網整理）。<br>
+      假訊息調查：台灣事實查核中心《2025 假訊息大調查》、中央廣播電臺。<br>
+      假新聞／迷思案例：台灣事實查核中心 2025 年度查核報告；大腦 10% 迷思（台大 CASE 報科學、PanSci 泛科學、維基百科）；金魚記憶（牛津大學研究報導、PanSci 泛科學、The News Lens）。<br>
+      AI 深偽：中央社、MyGoPen、風傳媒、Yahoo 新聞（黃仁勳、張忠謀、蔡英文、吳淡如遭冒用案）。<br>
+      兒少與遊戲詐騙：內政部警政署刑事警察局、165 全民防騙、媽媽寶寶、BabyHome 家長社群、MyCard 反詐騙宣導。<br>
+      詐騙心理：《為什麼我們會被騙？》《詐騙社會學》《騙局》、元氣網、Cheers、獨立評論相關報導。<br>
+      查證工具：Cofacts 真的假的、MyGoPen、趨勢科技防詐達人使用說明。<br>
+      <span style="color:var(--ink-soft)">（統計數字會隨時間更新，授課前可到 165 打詐儀表板查看最新資料。）</span>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="credit">製作人：黃漢龍老師</div>
+    網路識真 × 防詐教學專頁｜適用對象：國小六年級｜兩堂課各 40 分鐘。<br>
+    本頁為教學用途整理，歡迎教師於課堂使用與參考。查證永遠是最好的防護：先查證，再相信。
+  </div>
+</footer>
+
+<!-- ============================================================
+     隱藏統計（只有你登入後台才看得到，訪客完全看不到）
+     使用 GoatCounter，免費。設定方式見下方說明。
+     ▼▼ 請把下面兩處的 MYCODE 換成你在 GoatCounter 註冊的代號 ▼▼
+     例如你註冊的代號是 antiscam，就改成 https://antiscam.goatcounter.com/count
+     ============================================================ -->
+<script>
+  // 追蹤「學習單下載次數」：點下載連結時送出一筆事件
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[data-dl]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (window.goatcounter && window.goatcounter.count) {
+          window.goatcounter.count({
+            path:  'download/' + a.getAttribute('data-dl'),
+            title: '下載學習單：' + a.getAttribute('data-dl'),
+            event: true
+          });
+        }
+      });
+    });
+  });
+</script>
+<!-- 追蹤「到訪人數」：載入頁面時自動計算一次瀏覽 -->
+<script data-goatcounter="https://MYCODE.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>
