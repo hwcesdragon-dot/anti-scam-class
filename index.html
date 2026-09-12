@@ -185,9 +185,9 @@
 
   /* ---------- resource table ---------- */
   .res{margin-top:22px; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--panel); box-shadow:var(--shadow)}
-  .res-row{display:grid; grid-template-columns:150px 1fr; border-top:1px solid var(--line-soft)}
+  .res-row{display:grid; grid-template-columns:auto 1fr; border-top:1px solid var(--line-soft)}
   .res-row:first-child{border-top:0}
-  .res-row .name{padding:14px 18px; font-weight:700; background:#F4F6F3; border-right:1px solid var(--line-soft)}
+  .res-row .name{padding:14px 18px; font-weight:700; font-size:16px; white-space:nowrap; background:#F4F6F3; border-right:1px solid var(--line-soft)}
   .res-row .desc{padding:14px 18px; font-size:15px}
   .res-row .desc a{color:var(--true); text-decoration:underline; text-underline-offset:2px; word-break:break-all}
   @media(max-width:560px){
